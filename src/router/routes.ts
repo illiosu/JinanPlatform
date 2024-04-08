@@ -12,6 +12,26 @@ export const constantRoute = [
     },
   },
   {
+    path: '/homepage',
+    component: () => import('@/layout/index.vue'),
+    meta: {
+      hidden: false,
+      icon: 'CircleCloseFilled',
+    },
+    redirect: '/homepage',
+    children: [
+      {
+        path: '/homepage',
+        component: () => import('@/views/homepage/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ],
+  },
+  {
     path: '/',
     component: () => import('@/layout/index.vue'),
     name: 'layout',
@@ -26,7 +46,86 @@ export const constantRoute = [
         path: '/home',
         component: () => import('@/views/home/index.vue'),
         meta: {
-          title: '首页',
+          title: '地图浏览',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ],
+  },
+  {
+    path: '/navigation',
+    component: () => import('@/layout/index.vue'),
+    meta: {
+      hidden: false,
+      icon: 'CircleCloseFilled',
+    },
+    redirect: '/navigation',
+    children: [
+      {
+        path: '/navigation',
+        component: () => import('@/views/navigation/index.vue'),
+        meta: {
+          title: '导航路线',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ],
+  },
+  {
+    path: '/nearbyfacilities',
+    component: () => import('@/layout/index.vue'),
+    meta: {
+      hidden: false,
+      icon: 'CircleCloseFilled',
+    },
+    redirect: '/nearbyfacilities',
+    children: [
+      {
+        path: '/nearbyfacilities',
+        component: () => import('@/views/nearbyfacilities/index.vue'),
+        meta: {
+          title: '附近设施',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ],
+  },
+  {
+    path: '/tourisminfo',
+    component: () => import('@/layout/index.vue'),
+    meta: {
+      title: '旅游信息',
+      hidden: false,
+      icon: 'CircleCloseFilled',
+    },
+    redirect: '/tourisminfo',
+    children: [
+      {
+        path: '/tourisminfo',
+        component: () => import('@/views/tourisminfo/index.vue'),
+        meta: {
+          title: '旅游信息',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: '/tourisminfo',
+        component: () => import('@/views/tourisminfo/index.vue'),
+        meta: {
+          title: '旅游信息',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: '/tourisminfo',
+        component: () => import('@/views/tourisminfo/index.vue'),
+        meta: {
+          title: '旅游信息',
           hidden: false,
           icon: 'HomeFilled',
         },

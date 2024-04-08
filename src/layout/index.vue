@@ -77,7 +77,7 @@ export default {
     background-color: bisque;
     left: $base-slider-width;
     top: $base-tabbar-heigth;
-    padding: 20px;
+    // padding: 20px;
     overflow: auto;
     transition: all 0.3s;
     &.fold {

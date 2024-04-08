@@ -12,7 +12,7 @@
       </el-menu-item>
     </template>
     <!-- 有且只有一个子路由 -->
-    <template v-if="item.children && item.children.length === 1 && item.path === '/'">
+    <template v-if="item.children && item.children.length === 1">
       <el-menu-item v-if="!item.children[0].meta.hidden" :index="item.children[0].path" @click="goRoute">
         <el-icon>
           <component :is="item.children[0].meta.icon"></component>
