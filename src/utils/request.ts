@@ -7,10 +7,12 @@ let request = axios.create({
 })
 //请求拦截器
 request.interceptors.request.use(config => {
+    console.log('请求拦截器')
     return config;
 });
 //响应拦截器
 request.interceptors.response.use((response) => {
+    console.log('响应拦截器')
     return response.data;
 }, (error) => {
     //处理网络错误

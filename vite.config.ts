@@ -1,11 +1,14 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { defineConfig, loadEnv } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
-import { viteMockServe } from 'vite-plugin-mock'
+import { viteMockServe } from 'vite-plugin-mock';
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
+  //获取各种环境下的对应的变量
+  let env = loadEnv(mode, process.cwd());
+  // console.log(env)
   return {
     plugins: [
       vue(),
@@ -33,5 +36,16 @@ export default defineConfig(({ command }) => {
         },
       },
     },
-  }
-})
+    // 反向代理解决跨域问题
+    server: {
+      proxy: {
+        [env.VITE_APP_BASE_API]: {
+          target: env.VITE_SERVE,
+          // 需要代理跨域
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
+  };
+});

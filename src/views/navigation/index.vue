@@ -1,6 +1,7 @@
 <template>
   <div class="navigation">
-    <navigation></navigation>
+    尽量少调用，会超额
+    <!-- <navigation></navigation> -->
   </div>
 </template>
 

@@ -101,31 +101,31 @@ export const constantRoute = [
       hidden: false,
       icon: 'CircleCloseFilled',
     },
-    redirect: '/tourisminfo',
+    redirect: '/scenicArea',
     children: [
       {
-        path: '/tourisminfo',
-        component: () => import('@/views/tourisminfo/index.vue'),
+        path: '/scenicArea',
+        component: () => import('@/views/scenicArea/index.vue'),
         meta: {
-          title: '旅游信息',
+          title: '景区简介',
           hidden: false,
           icon: 'HomeFilled',
         },
       },
       {
-        path: '/tourisminfo',
-        component: () => import('@/views/tourisminfo/index.vue'),
+        path: '/catering',
+        component: () => import('@/views/catering/index.vue'),
         meta: {
-          title: '旅游信息',
+          title: '餐饮美食',
           hidden: false,
           icon: 'HomeFilled',
         },
       },
       {
-        path: '/tourisminfo',
-        component: () => import('@/views/tourisminfo/index.vue'),
+        path: '/traffic',
+        component: () => import('@/views/traffic/index.vue'),
         meta: {
-          title: '旅游信息',
+          title: '交通设施',
           hidden: false,
           icon: 'HomeFilled',
         },
