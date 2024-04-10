@@ -29,7 +29,7 @@
       <el-pagination
         v-model:current-page="pageNo"
         v-model:page-size="limit"
-        :page-sizes="[3, 5, 7, 9]"
+        :page-sizes="[2, 4, 6, 8]"
         :background="true"
         layout="prev, pager, next, jumper, ->,sizes,total"
         :total="total"
@@ -93,7 +93,7 @@ const form = reactive({
 // 当前页码
 let pageNo = ref<number>(1);
 // 每页显示条数
-let limit = ref<number>(3);
+let limit = ref<number>(2);
 // 总条数
 let total = ref<number>(0);
 // 存储景区信息的数组
