@@ -37,7 +37,7 @@
         @size-change="getScenicSpot" />
     </el-card>
     <!-- 对话框组件，添加景区 -->
-    <el-dialog v-model="dialogFormVisible" :title="form.id ? '编辑景区' : '添加景区'" width="500">
+    <el-dialog v-model="dialogFormVisible" :title="form.id ? '编辑景区' : '添加景区'" width="500" @close="handleClose">
       <el-form style="width: 80%">
         <el-form-item label="景区名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入景区名称"></el-input>
@@ -114,36 +114,60 @@ const getScenicSpotCount = async () => {
     // console.log(result.data);
     total.value = result.data;
   }
+
   // console.log(result);
 };
-// 封装添加景区的接口
-const addScenicSpotApi = async () => {
+// 封装添加或编辑景区的接口
+const addOrUpdateScenicSpotApi = async () => {
   console.log(form);
   const result = await reqAddorUpdateScenicSpot(form);
   console.log(result);
   //todo 后端结果类还没有封装,目前是void
-  // if (result.code == 200) {
-  //   ElMessageBox.success('添加成功');
-  //   dialogFormVisible.value = false;
-  //   getScenicSpot();
-  // } else {
-  //   ElMessageBox.error('添加失败');
-  // }
+  if (result.code == 200) {
+    dialogFormVisible.value = false;
+    ElMessageBox({
+      type: 'success',
+      message: '添加成功',
+    });
+
+    getScenicSpot();
+    getScenicSpotCount();
+  } else {
+    ElMessageBox({
+      type: 'error',
+      message: '添加失败',
+    });
+  }
 };
 // 封装删除景区的接口
 const deleteScenicSpotApi = async (id: number) => {
-  console.log(id);
-  // console.log('deleteScenicSpotApi')
-  const result = await reqDeleteScenicSpot(id);
-  // console.log(result);
-  //todo 后端结果类还没有封装,目前是void
-  // if (result.code == 200) {
-  //   ElMessageBox.success('删除成功');
-  //   getScenicSpot();
-  // } else {
-  //   ElMessageBox.error('删除失败');
-  // }
+  ElMessageBox.confirm('确认删除吗？')
+    .then(async () => {
+      // console.log(id);
+      // console.log('deleteScenicSpotApi')
+      const result = await reqDeleteScenicSpot(id);
+      // console.log(result);
+      //todo 后端结果类还没有封装,目前是void
+      if (result.code == 200) {
+        dialogFormVisible.value = false;
+        ElMessageBox({
+          type: 'success',
+          message: '删除成功',
+        });
+        getScenicSpot();
+        getScenicSpotCount();
+      } else {
+        ElMessageBox({
+          type: 'error',
+          message: '删除失败',
+        });
+      }
+    })
+    .catch(() => {
+      console.log('cancel');
+    });
 };
+
 // const getTest = async () => {
 //   const data = await test();
 //   console.log(data);
@@ -181,10 +205,11 @@ const cancel = () => {
   dialogFormVisible.value = false;
 };
 const confirm = () => {
-  dialogFormVisible.value = false;
+  // dialogFormVisible.value = false;
   ElMessageBox.confirm('确认提交吗？')
     .then(() => {
-      addScenicSpotApi();
+      addOrUpdateScenicSpotApi();
+      dialogFormVisible.value = false;
       // 再次请求接口获取数据
       getScenicSpot();
       // 清空表单
@@ -202,6 +227,20 @@ const confirm = () => {
     .catch(() => {
       console.log('cancel');
     });
+};
+//dialog关闭时的回调函数
+const handleClose = () => {
+  // dialogFormVisible.value = false;
+  console.log('handleClose');
+  // 清空表单
+  form.id = '';
+  form.name = '';
+  form.address = '';
+  form.adname = '';
+  form.x = '';
+  form.y = '';
+  form.type = '';
+  form.introduction = '';
 };
 // // 分页器页码发生变化时触发
 // const changePageNo = (val: number) => {
